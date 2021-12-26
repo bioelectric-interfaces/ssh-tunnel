@@ -1,0 +1,13 @@
+[Unit]
+Description=Secure SSH Tunnel to %I
+After=network-online.target ssh.service
+
+[Service]
+ExecStart=/usr/bin/ssh -F /etc/ssh-tunnel.conf -NT %i
+
+# Restart every >2 seconds to avoid StartLimitInterval failure
+RestartSec=5
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
